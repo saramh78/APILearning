@@ -36,8 +36,6 @@ namespace SimpleApi1.Services.Class
 
             return user2.UserToUserDto();
         }
-
-
         public bool Delete(int userId)
         {
             //ravesh 1
