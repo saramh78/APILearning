@@ -8,6 +8,10 @@ namespace SimpleApi1.Repositories.Class
     public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity,TKey> where TEntity : BaseEntity<TKey>
     {
         protected static List<TEntity> _entities = new List<TEntity>();
+        public BaseRepository()
+        {
+
+        }
 
         public void Delete(TKey id)
         {
@@ -27,7 +31,10 @@ namespace SimpleApi1.Repositories.Class
 
         public TEntity Find(TKey id)
         {
-           return _entities.FirstOrDefault(x => x.Id.Equals(id));
+            //cannot use
+         //   return _entities.FirstOrDefault(x => x.Id == id));
+
+            return _entities.FirstOrDefault(x => x.Id.Equals(id));
         }
 
         public void Delete(TEntity entity)

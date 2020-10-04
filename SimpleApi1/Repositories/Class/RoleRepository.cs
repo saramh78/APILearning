@@ -10,6 +10,10 @@ namespace SimpleApi1.Repositories.Class
 {
     public class RoleRepository : BaseRepository<Role, long>, IRoleRepository
     {
+        public RoleRepository()
+        {
+
+        }
         //public override Role Find(long id)
         //{
         //    return _entities.FirstOrDefault(x => x.Id == id);

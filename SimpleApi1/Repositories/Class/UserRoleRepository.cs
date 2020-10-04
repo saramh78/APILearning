@@ -5,7 +5,11 @@ using System;
 namespace SimpleApi1.Repositories.Class
 {
     public class UserRoleRepository : BaseRepository<UserRole, int>, IUserRoleRepository
-    {   
+    {
+        public UserRoleRepository()
+        {
+
+        }
         public void UpdateUserRole(UserRole oldur, UserRole newur)
         {
             throw new NotImplementedException();

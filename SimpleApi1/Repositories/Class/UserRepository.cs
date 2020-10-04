@@ -9,6 +9,10 @@ namespace SimpleApi1.Repositories.Class
 {
     public class UserRepository : BaseRepository<User, int>, IUserRepository
     {
+        public UserRepository()
+        {
+
+        }
         public override User Add(User user)
         {
             user.Id = _entities.Count() + 1;
