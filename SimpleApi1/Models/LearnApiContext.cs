@@ -21,6 +21,15 @@ namespace SimpleApi1.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<User>(d =>
+            {
+                d.HasKey(s => s.Id);
+                d.Property(s => s.NationalCode).HasMaxLength(10);
+                d.HasMany(s => s.UserRoles).WithOne(s => s.User).HasForeignKey(s => s.UserId);
+
+            });
+
             base.OnModelCreating(modelBuilder);
         }
     }
