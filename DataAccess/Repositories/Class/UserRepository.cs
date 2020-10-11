@@ -1,11 +1,9 @@
-﻿using SimpleApi1.Models;
-using SimpleApi1.Repositories.Interface;
+﻿using DataAccess.Model;
+using DataAccess.Repositories.Interface;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace SimpleApi1.Repositories.Class
+namespace DataAccess.Repositories
 {
     public class UserRepository : BaseRepository<User, int>, IUserRepository
     {

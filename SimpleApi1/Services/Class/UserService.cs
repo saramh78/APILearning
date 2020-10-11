@@ -1,8 +1,6 @@
-﻿using SimpleApi1.Dtos;
+﻿using DataAccess.Repositories.Interface;
+using SimpleApi1.Dtos;
 using SimpleApi1.Mapper;
-using SimpleApi1.Models;
-using SimpleApi1.Repositories.Class;
-using SimpleApi1.Repositories.Interface;
 using SimpleApi1.Services.Interface;
 using System;
 using System.Collections.Generic;

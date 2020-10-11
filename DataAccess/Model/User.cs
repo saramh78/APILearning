@@ -1,9 +1,10 @@
-﻿using SimpleApi1.Repositories.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace SimpleApi1.Models
+namespace DataAccess.Model
 {
+  
     public class User : BaseEntity<int>
     {
         //public int Id { get; set; }

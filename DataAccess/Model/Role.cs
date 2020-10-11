@@ -1,17 +1,19 @@
-﻿using SimpleApi1.Repositories.Interface;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace SimpleApi1.Models
+namespace DataAccess.Model
 {
     public class Role : BaseEntity<long>
     {
-        public int ss;
+
         //public long Id { get; set; }
 
         public string Name { get; set; }
 
         public virtual ICollection<UserRole> UserRoles { get; set; }
 
-        
+
     }
+
 }

@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DataAccess.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace SimpleApi1.Models
 {
@@ -26,8 +23,25 @@ namespace SimpleApi1.Models
             {
                 d.HasKey(s => s.Id);
                 d.Property(s => s.NationalCode).HasMaxLength(10);
+                d.Property(s => s.FirstName).HasMaxLength(32);
+                d.Property(s => s.LastName).HasMaxLength(32);
+                d.Property(s => s.UserName).HasMaxLength(32);               
                 d.HasMany(s => s.UserRoles).WithOne(s => s.User).HasForeignKey(s => s.UserId);
+               // d.Property(s => s.CreateOn).HasColumnType("datetime");
+            });
 
+            modelBuilder.Entity<Role>(d=>
+            {
+                d.HasKey(s => s.Id);
+                d.Property(s => s.Name).HasMaxLength(32);
+                d.HasMany(s => s.UserRoles).WithOne(s => s.Role).HasForeignKey(s => s.Roleid);
+            });
+
+            modelBuilder.Entity<UserRole>(d =>
+            {
+                d.HasKey(s => s.Id);
+             //   d.HasOne(s => s.User).WithMany(s => s.UserRoles).HasForeignKey(s => s.UserId);
+             //   d.HasOne(s => s.Role).WithMany(s => s.UserRoles).HasForeignKey(s => s.Roleid);
             });
 
             base.OnModelCreating(modelBuilder);

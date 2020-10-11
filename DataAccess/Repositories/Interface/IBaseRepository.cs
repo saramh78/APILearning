@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace SimpleApi1.Repositories.Interface
+namespace DataAccess.Repositories.Interface
 {
     public interface IBaseRepository<TEntity, TKey>
-        where TEntity : class 
+        where TEntity : class
     {
         TEntity Add(TEntity entity);
 

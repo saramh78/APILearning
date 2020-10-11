@@ -1,12 +1,7 @@
-﻿using SimpleApi1.Models;
-using SimpleApi1.Repositories.Interface;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DataAccess.Model;
+using DataAccess.Repositories.Interface;
 
-namespace SimpleApi1.Repositories.Class
+namespace DataAccess.Repositories
 {
     public class RoleRepository : BaseRepository<Role, long>, IRoleRepository
     {
@@ -26,4 +21,5 @@ namespace SimpleApi1.Repositories.Class
         }
 
     }
+
 }

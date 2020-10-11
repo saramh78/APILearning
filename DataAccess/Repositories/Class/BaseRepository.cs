@@ -1,11 +1,11 @@
-﻿using SimpleApi1.Models;
+﻿using DataAccess.Model;
+using DataAccess.Repositories.Interface;
 using System.Collections.Generic;
 using System.Linq;
-using SimpleApi1.Repositories.Interface;
 
-namespace SimpleApi1.Repositories.Class
+namespace DataAccess.Repositories
 {
-    public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity,TKey> where TEntity : BaseEntity<TKey>
+    public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey> where TEntity : BaseEntity<TKey>
     {
         protected static List<TEntity> _entities = new List<TEntity>();
         public BaseRepository()
@@ -32,7 +32,7 @@ namespace SimpleApi1.Repositories.Class
         public TEntity Find(TKey id)
         {
             //cannot use
-         //   return _entities.FirstOrDefault(x => x.Id == id));
+            //   return _entities.FirstOrDefault(x => x.Id == id));
 
             return _entities.FirstOrDefault(x => x.Id.Equals(id));
         }
@@ -42,7 +42,4 @@ namespace SimpleApi1.Repositories.Class
             _entities.Remove(entity);
         }
     }
-
-
 }
-

@@ -1,8 +1,8 @@
-﻿using SimpleApi1.Models;
-using SimpleApi1.Repositories.Interface;
+﻿using DataAccess.Model;
+using DataAccess.Repositories.Interface;
 using System;
 
-namespace SimpleApi1.Repositories.Class
+namespace DataAccess.Repositories
 {
     public class UserRoleRepository : BaseRepository<UserRole, int>, IUserRoleRepository
     {
