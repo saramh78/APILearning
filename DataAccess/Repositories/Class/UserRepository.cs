@@ -1,4 +1,5 @@
 ﻿using DataAccess.Model;
+using DataAccess.Models;
 using DataAccess.Repositories.Interface;
 using System;
 using System.Linq;
@@ -7,16 +8,14 @@ namespace DataAccess.Repositories
 {
     public class UserRepository : BaseRepository<User, int>, IUserRepository
     {
-        public UserRepository()
+        public UserRepository(LearnApiContext learnApiContext) : base(learnApiContext)
         {
-
         }
+
         public override User Add(User user)
         {
-            user.Id = _entities.Count() + 1;
             user.CreateOn = DateTime.Now;
-            _entities.Add(user);
-            return user;
+           return base.Add(user);
         }
 
         public User UpdateUser(User user)

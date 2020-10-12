@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace DataAccess.Model
 {
-    public class Role : BaseEntity<long>
+    public class Role : BaseEntity<int>
     {
 
         //public long Id { get; set; }

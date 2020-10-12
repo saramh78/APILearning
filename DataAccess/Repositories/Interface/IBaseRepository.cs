@@ -11,7 +11,7 @@ namespace DataAccess.Repositories.Interface
 
         List<TEntity> GetAll();
 
-        void Delete(TKey id);
+        void Delete(List<TEntity> entities);
 
         void Delete(TEntity entity);
     }

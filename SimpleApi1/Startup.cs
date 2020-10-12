@@ -1,8 +1,10 @@
-﻿using DataAccess.Repositories;
+﻿using DataAccess.Models;
+using DataAccess.Repositories;
 using DataAccess.Repositories.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +26,11 @@ namespace SimpleApi1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            var connectionString = Configuration.GetValue<string>("connectionString");
+            //context
+            services.AddDbContext<LearnApiContext>(options => options.UseSqlServer(connectionString));
+
 
             //Repository
             services.AddScoped<IRoleRepository, RoleRepository>();
