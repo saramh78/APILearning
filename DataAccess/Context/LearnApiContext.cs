@@ -7,6 +7,7 @@ namespace DataAccess.Models
     {
         public LearnApiContext(DbContextOptions options) : base(options)
         {
+           
         }
 
         public DbSet<User> Users { get; set; }

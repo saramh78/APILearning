@@ -1,4 +1,4 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.Models;   
 using DataAccess.Repositories;
 using DataAccess.Repositories.Interface;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +27,10 @@ namespace SimpleApi1
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            var connectionString = Configuration.GetValue<string>("connectionString");
+            // var connectionString = Configuration.GetConnectionString("LearnApiConnectionString")
+            var connectionString = Configuration.GetValue<string>("ConnectionStrings:LearnApiConnectionString");
+
+            var microsftLogging = Configuration.GetValue<int>("1st:sanati:pollkhord:majid");
             //context
             services.AddDbContext<LearnApiContext>(options => options.UseSqlServer(connectionString));
 
