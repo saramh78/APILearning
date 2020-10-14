@@ -2,6 +2,7 @@
 using SimpleApi1.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SimpleApi1.Mapper
 {
@@ -14,11 +15,12 @@ namespace SimpleApi1.Mapper
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
                 NationalCode = userDto.NationalCode,
-                Id = userDto.Id,
                 UserName = userDto.UserName,
-                CreateOn = userDto.CreateOn
-                // UserRoles = userDto.RoleDtos.Select(x => new UserRole { Roleid = x.Id, UserId = userDto.Id }).ToList()
+                CreateOn = userDto.CreateOn,
+              //  UserRoles = userDto.RoleDtos.Select(x => new UserRole { RoleId = x.Id.Value, UserId = userDto.Id }).ToList()
             };
+
+
         }
 
         public static UserDto UserToUserDto(this User user)
@@ -31,7 +33,7 @@ namespace SimpleApi1.Mapper
                 LastName = user.LastName,
                 NationalCode = user.NationalCode,
                 CreateOn=user.CreateOn,
-                // RoleDtos = user.UserRoles.Select(x => new RoleDto() { Id = x.Roleid, Name = x.Role.Name }).ToList()
+                RoleDtos = user.UserRoles != null ?  user.UserRoles.Select(x => new RoleDto() { Name = x.Role.Name }).ToList() : null
             };
         }
 
@@ -63,10 +65,6 @@ namespace SimpleApi1.Mapper
         //    arabi.Replace("ي", "ی");
         //    return arabi;
         //}
-
-
-
-
     }
 
 

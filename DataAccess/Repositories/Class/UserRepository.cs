@@ -1,8 +1,10 @@
 ﻿using DataAccess.Model;
 using DataAccess.Models;
 using DataAccess.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
@@ -16,6 +18,22 @@ namespace DataAccess.Repositories
         {
             user.CreateOn = DateTime.Now;
            return base.Add(user);
+        }
+
+        public override async Task<User> FindAsync(int id)
+        {
+            return await _context.Set<User>()
+                .Include(x => x.UserRoles)
+                .ThenInclude(x => x.Role)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public override  User Find(int id)
+        {
+            return _context.Set<User>()
+                .Include(x => x.UserRoles)
+                .ThenInclude(x => x.Role)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public User UpdateUser(User user)

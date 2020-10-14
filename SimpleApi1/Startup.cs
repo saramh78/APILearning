@@ -27,10 +27,14 @@ namespace SimpleApi1
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            // var connectionString = Configuration.GetConnectionString("LearnApiConnectionString")
-            var connectionString = Configuration.GetValue<string>("ConnectionStrings:LearnApiConnectionString");
+            var connectionString = Configuration.GetConnectionString("LearnApiConnectionStringMajid");
+          
+            //var connectionString = Configuration.GetValue<string>("ConnectionStrings:LearnApiConnectionString");
 
-            var microsftLogging = Configuration.GetValue<int>("1st:sanati:pollkhord:majid");
+           
+            // var microsftLogging = Configuration.GetValue<int>("1st:sanati:pollkhord:majid");
+            
+            
             //context
             services.AddDbContext<LearnApiContext>(options => options.UseSqlServer(connectionString));
 
@@ -42,6 +46,8 @@ namespace SimpleApi1
 
             //Services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserRoleService, UserRoleService>();
             
         }
 

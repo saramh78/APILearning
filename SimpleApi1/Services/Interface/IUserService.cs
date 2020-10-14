@@ -8,9 +8,11 @@ namespace SimpleApi1.Services.Interface
 {
     public interface IUserService
     {
-        UserDto Add(UserDto userDto); 
+        UserDto Add(UserDto userDto);
         UserDto Get(int userId);
+        Task<UserDto> GetAsync(int userId);
         bool Delete(int userId);
         List<UserDto> GetAll();
+        Task<List<UserDto>> GetAllAsync();
     }
 }

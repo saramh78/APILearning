@@ -1,8 +1,10 @@
 ﻿using DataAccess.Model;
 using DataAccess.Models;
 using DataAccess.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
@@ -16,7 +18,7 @@ namespace DataAccess.Repositories
             _context = learnApiContext;
         }
 
-        public void Delete(List<TEntity> entities)
+        public virtual void Delete(List<TEntity> entities)
         {
             // _context.RemoveAll(x => x.Id.Equals(id));
             _context.Set<TEntity>().RemoveRange(entities);
@@ -31,23 +33,41 @@ namespace DataAccess.Repositories
             return entity;
         }
 
-        public List<TEntity> GetAll()
+
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
+        {
+            await _context.Set<TEntity>().AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+
+        public virtual List<TEntity> GetAll()
         {
             return _context.Set<TEntity>().ToList();
         }
 
-        public TEntity Find(TKey id)
+        public virtual TEntity Find(TKey id)
         {
-            //cannot use
-            //   return _entities.FirstOrDefault(x => x.Id == id));
-
             return _context.Set<TEntity>().FirstOrDefault(x => x.Id.Equals(id));
         }
 
-        public void Delete(TEntity entity)
+        public virtual async Task<TEntity> FindAsync(TKey id)
+        {
+            return await _context.Set<TEntity>().FirstOrDefaultAsync(x => x.Id.Equals(id));
+
+        }
+
+        public virtual void Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
             _context.SaveChanges();
         }
+
+        public virtual async Task<List<TEntity>> GetAllAsync()
+        {
+            return await _context.Set<TEntity>().ToListAsync();
+
+        }
+
     }
 }
