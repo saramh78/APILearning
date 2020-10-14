@@ -14,7 +14,5 @@ namespace SimpleApi1.Dtos
         public string UserName { get; set; }
         public DateTime CreateOn { get; set; }
         public List<RoleDto> RoleDtos { get; set; }
-
-
     }
 }

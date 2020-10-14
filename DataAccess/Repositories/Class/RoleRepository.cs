@@ -2,6 +2,8 @@
 
 using DataAccess.Models;
 using DataAccess.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
@@ -14,6 +16,14 @@ namespace DataAccess.Repositories
         public void UpdateRule(Role oldrole, Role newrole)
         {
 
+        }
+
+        public override async Task<Role> FindAsync(int id)
+        {
+            return await _context.Set<Role>()
+                 .Include(x => x.UserRoles)
+                 .ThenInclude(x => x.User)
+                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
     }

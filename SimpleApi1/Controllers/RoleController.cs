@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleApi1.Dtos;
 using SimpleApi1.Services.Interface;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -29,6 +30,12 @@ namespace SimpleApi1.Controllers
         public async Task<ActionResult<List<RoleDto>>> GetAll()
         {
             return await _roleService.GetAllAsync();
+        }
+
+        [HttpGet("GetRoleUser")]
+        public async Task<ActionResult<List<RoleDto>>> GetRoleUser(int roleId)
+        {
+            throw new NotImplementedException();
         }
 
     }
