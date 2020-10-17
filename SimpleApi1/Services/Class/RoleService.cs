@@ -12,11 +12,21 @@ namespace SimpleApi1.Services.Class
     public class RoleService : IRoleService
     {
         private readonly IRoleRepository _roleRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IUserRoleRepository _userRoleRepository;
 
-        public RoleService(IRoleRepository roleRepository)
+        public RoleService(
+            IUserRepository userRepository,
+            IRoleRepository roleRepository,
+            IUserRoleRepository userRoleRepository
+        )
         {
-            _roleRepository = roleRepository;
+            this._userRepository = userRepository;
+            this._roleRepository = roleRepository;
+            this._userRoleRepository = userRoleRepository;
         }
+
+
         public async Task<RoleDto> addAsync(RoleDto roleDto)
         {
             var role1 = roleDto.RoleDtoToRole();
@@ -28,6 +38,16 @@ namespace SimpleApi1.Services.Class
         {
             var roles = await _roleRepository.GetAllAsync();
             return roles.RolesToRolesDto();
+        }
+
+        public async Task<RoleDto> GetAsync(int roleId)
+        {
+            var role = await _roleRepository.FindAsync(roleId);
+            if (role == null)
+            {
+                throw new Exception("User Not Found");
+            }
+            return role.RoleToRoleDto();
         }
     }
 }

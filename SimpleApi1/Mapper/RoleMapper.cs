@@ -2,6 +2,7 @@
 using SimpleApi1.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SimpleApi1.Mapper
 {
@@ -20,7 +21,8 @@ namespace SimpleApi1.Mapper
             return new RoleDto()
             {
                 Name = role.Name,
-                Id =  role.Id                
+                Id =  role.Id,
+                UserDtos = role.UserRoles != null ? role.UserRoles.Select(x => new UserDto2() { UserName = x.User.UserName, FirstName=x.User.FirstName, LastName=x.User.LastName }).ToList() : null
             };
         }
 

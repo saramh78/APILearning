@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleApi1.Dtos;
+using SimpleApi1.Helper;
 using SimpleApi1.Services.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -31,6 +32,9 @@ namespace SimpleApi1.Controllers
         [HttpGet]
         public async Task<ActionResult<List<UserDto>>> Get()
         {
+            List<int> data = new List<int>() { 1, 2, 3, 4, 5, 6, 7 };
+
+            var a = data.MaxSara();
             var service = await _userService.GetAllAsync();
             return service;
         }

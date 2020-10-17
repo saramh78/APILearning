@@ -10,6 +10,6 @@ namespace SimpleApi1.Services.Interface
     {
         Task<RoleDto> addAsync(RoleDto roleDto);
         Task<List<RoleDto>> GetAllAsync();
-
+        Task<RoleDto> GetAsync(int roleId);
     }
 }

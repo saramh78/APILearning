@@ -32,10 +32,11 @@ namespace SimpleApi1.Controllers
             return await _roleService.GetAllAsync();
         }
 
-        [HttpGet("GetRoleUser")]
-        public async Task<ActionResult<List<RoleDto>>> GetRoleUser(int roleId)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<RoleDto>> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            var service = await _roleService.GetAsync(id);
+            return service;
         }
 
     }
