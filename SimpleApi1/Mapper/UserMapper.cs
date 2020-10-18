@@ -23,7 +23,55 @@ namespace SimpleApi1.Mapper
 
         }
 
-        public static UserDto UserToUserDto(this User user)
+
+
+        public static User UserDtoToUserEager(this UserDto userDto)
+        {
+            return new User()
+            {
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                NationalCode = userDto.NationalCode,
+                UserName = userDto.UserName,
+                CreateOn = userDto.CreateOn,
+                UserRoles = userDto.RoleDtos.Select(x => new UserRole { RoleId = x.Id.Value, UserId = userDto.Id }).ToList()
+            };
+
+
+        }
+
+
+        public static User UserDtoToUserEager2(this UserDto userDto)
+        {
+            return new User()
+            {
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                NationalCode = userDto.NationalCode,
+                UserName = userDto.UserName,
+                CreateOn = userDto.CreateOn,
+                UserRoles = userDto.RoleId.Select(x => new UserRole { RoleId = x, UserId = userDto.Id }).ToList()
+            };
+
+
+        }
+
+
+        public static UserDto UserToUserDtoForAdd(this User user)
+        {
+            return new UserDto()
+            {
+                FirstName = user.FirstName,
+                UserName = user.UserName,
+                Id = user.Id,
+                LastName = user.LastName,
+                NationalCode = user.NationalCode,
+                CreateOn = user.CreateOn,
+            };
+        }
+
+
+        public static UserDto UserToUserDtoForGet(this User user)
         {
             return new UserDto()
             {
@@ -46,7 +94,7 @@ namespace SimpleApi1.Mapper
             var userDtos = new List<UserDto>();
             for (int i = 0; i < users.Count; i++)
             {
-                userDtos.Add(users[i].UserToUserDto());
+                userDtos.Add(users[i].UserToUserDtoForGet());
             }
 
             return userDtos;

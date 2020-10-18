@@ -35,7 +35,7 @@ namespace DataAccess.Models
                 d.Property(s => s.UserName).HasMaxLength(32).IsRequired();
                 d.Property(s => s.Mobile).HasMaxLength(11);
                 d.HasMany(s => s.UserRoles).WithOne(s => s.User).HasForeignKey(s => s.UserId);
-               // d.Property(s => s.CreateOn).HasColumnType("datetime");
+                d.Property(s => s.CreateOn).HasColumnType("datetime").HasDefaultValueSql("GETDATE()");
             });
 
             modelBuilder.Entity<Role>(d=>

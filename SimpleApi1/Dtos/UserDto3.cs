@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace SimpleApi1.Dtos
 {
-    public class UserDto
+    public class UserDto3
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

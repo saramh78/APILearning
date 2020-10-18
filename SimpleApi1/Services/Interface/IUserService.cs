@@ -14,5 +14,6 @@ namespace SimpleApi1.Services.Interface
         bool Delete(int userId);
         List<UserDto> GetAll();
         Task<List<UserDto>> GetAllAsync();
+        UserDto AddEager(UserDto userDto);
     }
 }

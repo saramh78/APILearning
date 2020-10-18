@@ -27,7 +27,7 @@ namespace SimpleApi1
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            var connectionString = Configuration.GetConnectionString("LearnApiConnectionStringSara");
+            var connectionString = Configuration.GetConnectionString("LearnApiConnectionStringSherkat");
           
             //var connectionString = Configuration.GetValue<string>("ConnectionStrings:LearnApiConnectionString");
 

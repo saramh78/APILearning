@@ -1,4 +1,5 @@
-﻿using DataAccess.Repositories.Interface;
+﻿using DataAccess.Model;
+using DataAccess.Repositories.Interface;
 using SimpleApi1.Dtos;
 using SimpleApi1.Mapper;
 using SimpleApi1.Services.Interface;
@@ -29,12 +30,26 @@ namespace SimpleApi1.Services.Class
 
         public UserDto Add(UserDto userDto)
         {
-
             var user1 = userDto.UserDtoToUser();
             var user2 = _userRepository.Add(user1);
 
-            return user2.UserToUserDto();
+            foreach(var ur in userDto.RoleId)
+            {
+                UserRole userRole = new UserRole() { RoleId = ur, UserId = user2.Id };
+                var userRole2 = _userRoleRepository.Add(userRole);
+         //       user2.UserRoles.Add(userRole);
+            }
+            return user2.UserToUserDtoForAdd();
         }
+
+
+        public UserDto AddEager(UserDto userDto)
+        {
+            var user1 = userDto.UserDtoToUserEager2();
+            var user2 = _userRepository.Add(user1);
+            return user2.UserToUserDtoForAdd();
+        }
+
         public bool Delete(int userId)
         {
             //ravesh 1
@@ -58,7 +73,7 @@ namespace SimpleApi1.Services.Class
             {
                 throw new Exception("User Not Found");
             }
-            return user.UserToUserDto();
+            return user.UserToUserDtoForGet();
         }
 
         public List<UserDto> GetAll()
@@ -70,7 +85,6 @@ namespace SimpleApi1.Services.Class
         {
             var users = await _userRepository.GetAllAsync();
             return users.UsersToUserDtos();
-
         }
 
         public async Task<UserDto> GetAsync(int userId)
@@ -80,7 +94,7 @@ namespace SimpleApi1.Services.Class
             {
                 throw new Exception("User Not Found");
             }
-            return user.UserToUserDto();
+            return user.UserToUserDtoForGet();
         }
     }
 }
