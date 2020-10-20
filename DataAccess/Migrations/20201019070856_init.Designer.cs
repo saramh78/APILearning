@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(LearnApiContext))]
-    [Migration("20201018075955_datetime")]
-    partial class datetime
+    [Migration("20201019070856_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,7 +57,8 @@ namespace DataAccess.Migrations
                     b.Property<string>("Mobile")
                         .HasMaxLength(11);
 
-                    b.Property<int>("NationalCode")
+                    b.Property<string>("NationalCode")
+                        .IsRequired()
                         .HasMaxLength(10);
 
                     b.Property<string>("UserName")

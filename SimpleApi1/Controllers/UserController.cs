@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleApi1.Dtos;
-using SimpleApi1.Helper;
 using SimpleApi1.Services.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -31,10 +30,7 @@ namespace SimpleApi1.Controllers
         // api/user
         [HttpGet]
         public async Task<ActionResult<List<UserDto>>> Get()
-        {
-            //List<int> data = new List<int>() { 1, 2, 3, 4, 5, 6, 7 };
-
-            //var a = data.MaxSara();
+        {        
             var service = await _userService.GetAllAsync();
             return service;
         }
@@ -63,12 +59,30 @@ namespace SimpleApi1.Controllers
             return service;
         }
 
+        
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public ActionResult<bool> Delete(int id)
+        {
+            var service = _userService.Delete(id);
+            return service;
+
+        }
+
+
         // POST api/values
         [HttpPost]
         public ActionResult<UserDto> Post(UserDto userDto)
         {
             var service = _userService.Add(userDto);
             return service;
+        }
+
+
+        [HttpPost("AddUserRole")]
+        public async Task<ActionResult<UserRoleDto>> AddUserRole(UserRoleDto userRoleDto)
+        {
+            return await _userRoleService.AddAsync(userRoleDto);
         }
 
 
@@ -80,27 +94,25 @@ namespace SimpleApi1.Controllers
         }
 
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpGet("GetUserLinq/{userId}")]
+        public ActionResult<UserDtoLinq> GetUserLinq(int userId)
         {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public ActionResult<bool> Delete(int id)
-        {
-            var service = _userService.Delete(id);
+            var service = _userService.GetUserByLinq(userId);
             return service;
-
         }
 
 
-        [HttpPost("AddUserRole")]
-        public async Task<ActionResult<UserRoleDto>> AddUserRole(UserRoleDto userRoleDto)
-        {
-            return await _userRoleService.AddAsync(userRoleDto);
-        } 
 
+        // PUT api/values/5
+        [HttpPut("UpdateUserAsync/{userId}")]
+        public async Task<UserDto> UpdateUserAsync(int userId, UserUpdateDto userDto)
+        {
+            //   var service = await _userService.UpdateUserAsync(userId, userDto);
+         //  var auth = Request.Headers["cddf"].ToString();
+            
+
+            var service = await _userService.UpdateUserAsync2(userId, userDto);
+            return service;
+        }
     }
 }

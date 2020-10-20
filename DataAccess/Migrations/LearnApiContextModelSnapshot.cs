@@ -55,7 +55,8 @@ namespace DataAccess.Migrations
                     b.Property<string>("Mobile")
                         .HasMaxLength(11);
 
-                    b.Property<int>("NationalCode")
+                    b.Property<string>("NationalCode")
+                        .IsRequired()
                         .HasMaxLength(10);
 
                     b.Property<string>("UserName")

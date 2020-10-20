@@ -36,10 +36,18 @@ namespace SimpleApi1.Mapper
                 CreateOn = userDto.CreateOn,
                 UserRoles = userDto.RoleDtos.Select(x => new UserRole { RoleId = x.Id.Value, UserId = userDto.Id }).ToList()
             };
-
-
         }
 
+        public static User UserDtoToUserUpdate(this UserDto userDto,User user)
+        {
+            user.FirstName = userDto.FirstName;
+            user.LastName = userDto.LastName;
+            user.NationalCode = userDto.NationalCode;
+            user.UserName = userDto.UserName;
+            user.UserRoles = userDto.RoleDtos.Select(x => new UserRole { RoleId = x.Id.Value, UserId = userDto.Id }).ToList();
+            return user; 
+
+        }
 
         public static User UserDtoToUserEager2(this UserDto userDto)
         {
@@ -50,10 +58,8 @@ namespace SimpleApi1.Mapper
                 NationalCode = userDto.NationalCode,
                 UserName = userDto.UserName,
                 CreateOn = userDto.CreateOn,
-                UserRoles = userDto.RoleId.Select(x => new UserRole { RoleId = x, UserId = userDto.Id }).ToList()
+                UserRoles = userDto.RoleId != null  && userDto.RoleId?.Count > 0 ?  userDto.RoleId.Select(x => new UserRole { RoleId = x, UserId = userDto.Id }).ToList() : null
             };
-
-
         }
 
 
@@ -85,6 +91,21 @@ namespace SimpleApi1.Mapper
             };
         }
 
+        public static UserDto UserToUserDtoForResultUpdate(this User user)
+        {
+            return new UserDto()
+            {
+                FirstName = user.FirstName,
+                UserName = user.UserName,
+                Id = user.Id,
+                LastName = user.LastName,
+                NationalCode = user.NationalCode,
+                CreateOn = user.CreateOn,
+              //  RoleDtos = user.UserRoles != null ? user.UserRoles.Select(x => new RoleDto() { Name = x.Role.Name }).ToList() : null
+            };
+        }
+
+
         public static List<UserDto> UsersToUserDtos(this List<User> users)
         {
             if (users == null)
@@ -113,6 +134,15 @@ namespace SimpleApi1.Mapper
         //    arabi.Replace("ي", "ی");
         //    return arabi;
         //}
+
+
+        public static User UserUpdateDtoToUser(this UserUpdateDto userUpdateDto,User user,int userId)
+        {
+            user.LastName = userUpdateDto.LastName;
+            user.UserRoles = userUpdateDto.RoleDtos.Select(x => new UserRole { RoleId = x.Id.Value, UserId = userId }).ToList();
+            return user;
+
+        }
     }
 
 

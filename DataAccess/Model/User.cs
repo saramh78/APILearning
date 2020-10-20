@@ -6,7 +6,7 @@ namespace DataAccess.Model
 
     public class User : BaseEntity<int>
     {
-        public int NationalCode { get; set; }
+        public string NationalCode { get; set; }
 
         public string UserName { get; set; }
 

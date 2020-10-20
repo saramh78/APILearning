@@ -27,12 +27,12 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NationalCode = table.Column<int>(maxLength: 10, nullable: false),
+                    NationalCode = table.Column<string>(maxLength: 10, nullable: false),
                     UserName = table.Column<string>(maxLength: 32, nullable: false),
                     FirstName = table.Column<string>(maxLength: 32, nullable: false),
                     Mobile = table.Column<string>(maxLength: 11, nullable: true),
                     LastName = table.Column<string>(maxLength: 32, nullable: false),
-                    CreateOn = table.Column<DateTime>(nullable: false)
+                    CreateOn = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {

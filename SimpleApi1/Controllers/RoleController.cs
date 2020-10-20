@@ -26,8 +26,8 @@ namespace SimpleApi1.Controllers
         }
 
         //Get  api/role/GetAll
-        [HttpGet("GetAll")]
-        public async Task<ActionResult<List<RoleDto>>> GetAll()
+        [HttpGet]
+        public async Task<ActionResult<List<RoleDto>>> Get()
         {
             return await _roleService.GetAllAsync();
         }

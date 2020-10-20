@@ -15,5 +15,8 @@ namespace SimpleApi1.Services.Interface
         List<UserDto> GetAll();
         Task<List<UserDto>> GetAllAsync();
         UserDto AddEager(UserDto userDto);
+        Task<UserDto> UpdateUserAsync(int userId, UserUpdateDto userDto);
+        Task<UserDto> UpdateUserAsync2(int userId, UserUpdateDto userUpdateDto);
+        UserDtoLinq GetUserByLinq(int userId);
     }
 }

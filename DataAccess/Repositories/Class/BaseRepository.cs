@@ -2,8 +2,10 @@
 using DataAccess.Models;
 using DataAccess.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
@@ -11,6 +13,8 @@ namespace DataAccess.Repositories
     public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey> where TEntity : BaseEntity<TKey>
     {
         protected readonly LearnApiContext _context;
+
+        public LearnApiContext Context { get => _context;}
 
         //  protected static List<TEntity> _entities = new List<TEntity>();
         public BaseRepository(LearnApiContext learnApiContext)
@@ -69,5 +73,23 @@ namespace DataAccess.Repositories
 
         }
 
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            _context.Set<TEntity>().Update(entity);
+            await _context.SaveChangesAsync();
+            return entity;            
+              
+        }
+
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
+        {
+           return _context.Set<TEntity>().Where(predicate).ToList();
+        }
+
+        public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+           
+            return await _context.Set<TEntity>().Where(predicate).OrderByDescending(x => x.Id).ToListAsync();
+        }
     }
 }
